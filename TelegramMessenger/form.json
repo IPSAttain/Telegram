@@ -5,5 +5,6 @@
         { "type": "ValidationTextBox", "name": "Recipients", "caption": "Empfänger (CSV)" },
 		{ "type": "CheckBox", "name": "FetchIncoming", "caption": "Eingehende Nachrichten abrufen" },
 		{ "type": "CheckBox", "name": "ProcessIncoming", "caption": "Eingehende Nachrichten verarbeiten" },
+		{ "type": "SelectScript", "name": "ProcessIncomingSkript", "caption": "Skript für eingehende Nachrichten" },
     ]
 }

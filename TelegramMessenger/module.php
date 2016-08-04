@@ -16,11 +16,8 @@
 			$this->RegisterPropertyString("Recipients", "123456789,987654321");   
 			$this->RegisterPropertyBoolean("FetchIncoming", false);
 			$this->RegisterPropertyBoolean("ProcessIncoming", false);
-			//
-			// Skript für die Verarbeitung eingehender Nachrichten erstellen.
-			// Dies kann vom Nutzer dann nach seinen Wünschen bearbeitet werden.
-			//
-			$this->RegisterScript("PROCESS_INCOMING", "Process incoming messages",'<?php\nfunction process_incoming($instance, $senderid, $text) {\n}\n?>');
+			$this->RegisterPropertyInteger ("ProcessIncomingSkript", 0);
+		
 		}
 		
 		
@@ -83,7 +80,7 @@
 						$recips = explode(",",$this->ReadPropertyString("Recipients"));
 						foreach($recips as $r) {
 							if ($r == $chat_id) {
-								include_once(IPS_GetKernelDirEx()."scripts/".IPS_GetScriptFile($this->GetIDForIdent("PROCESS_INCOMING")));
+								include_once(IPS_GetKernelDirEx()."scripts/".IPS_GetScriptFile($this->ReadPropertyInteger("ProcessIncomingSkript")));
 								process_incoming($this->InstanceID, $chat_id, $text);
 								break;
 							}
