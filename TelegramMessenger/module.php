@@ -20,9 +20,7 @@
 			// Skript für die Verarbeitung eingehender Nachrichten erstellen.
 			// Dies kann vom Nutzer dann nach seinen Wünschen bearbeitet werden.
 			//
-			if(!$this->GetIDForIdent("PROCESS_INCOMING")) {
-				$this->RegisterScript("PROCESS_INCOMING", "Process incoming messages",'<?php\nfunction process_incoming($instance, $senderid, $text) {\n}\n?>');
-			}
+			$this->RegisterScript("PROCESS_INCOMING", "Process incoming messages",'<?php\nfunction process_incoming($instance, $senderid, $text) {\n}\n?>');
 		}
 		
 		
