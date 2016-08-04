@@ -62,7 +62,7 @@
 		}
 		
 		public function GetUpdates() {
-			if ($this->ReadPropertyString("FetchIncoming") == "True") {
+			if ($this->ReadPropertyBoolean("FetchIncoming")) {
 				include_once(__DIR__ . "/Telegram.php");
 				$telegram = new Telegram($this->ReadPropertyString("BotID"));
 				$req = $telegram->getUpdates();
@@ -75,7 +75,7 @@
 					$date = $telegram->Date();
 					IPS_LogMessage("Telegram", "Update von " . $chat_id . " -> " . $text . " / " . $date . " / " . print_r($telegram,true));
 					// Verarbeiten von Nachrichten (aber nur wenn aktiviert und Nachricht nicht älter als 1 Minute);
-					if ($this->ReadPropertyString("ProcessIncoming") == "True" && (time() - $date) < 60) {
+					if ($this->ReadPropertyBoolean("ProcessIncoming") && (time() - $date) < 60) {
 						// Ist der User bekannt?
 						$recips = explode(",",$this->ReadPropertyString("Recipients"));
 						foreach($recips as $r) {
