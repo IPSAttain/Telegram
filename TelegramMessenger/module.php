@@ -50,7 +50,7 @@
 			$telegram->sendMessage($content);
 		}
 		
-		public function SendPhoto($text, $jpeg_path, $userid) {
+		public function SendImage($text, $jpeg_path, $userid) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$img = curl_file_create($jpeg_path, 'image/jpg', md5($jpeg_path));
@@ -58,7 +58,7 @@
 			$telegram->sendPhoto($content);
 		}
 		
-		public function SendPhotoToAll($text, $jpeg_path) {
+		public function SendImageToAll($text, $jpeg_path) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
