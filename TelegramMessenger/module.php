@@ -46,7 +46,7 @@
 		public function SendText($text, $userid) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
-			$content = array('chat_id' => $userid, 'text' => $text);
+			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => "Markdown");
 			$telegram->sendMessage($content);
 		}
 		
