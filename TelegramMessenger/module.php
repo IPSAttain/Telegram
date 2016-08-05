@@ -53,7 +53,7 @@
 		public function SendImage($text, $jpeg_path, $userid) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
-			$img = curl_file_create($jpeg_path, 'image/jpg', md5($jpeg_path));
+			$img = curl_file_create($jpeg_path, 'image/jpg', md5($jpeg_path).".jpg");
 			$content = array('chat_id' => $userid, 'caption' => $text, 'photo' => $img);
 			$telegram->sendPhoto($content);
 		}
