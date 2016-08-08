@@ -32,8 +32,8 @@ Für den Versand von Nachrichten an die definierten Empfänger definiert das Modul
 
 - Telegram_SendText($InstanzID, $text, $UserID)
 - Telegram_SendTextToAll($InstanzID, $text)
-- Telegram_SendImage($InstanzID, $Path_To_ImageFile, $UserID)
-- Telegram_SendImageToAll($InstanzID, $Path_To_ImageFile)
+- Telegram_SendImage($InstanzID, $text, $Path_To_ImageFile, $UserID)
+- Telegram_SendImageToAll($InstanzID, $text, $Path_To_ImageFile)
 
 Wichtig beim Versand von Bildern ist, dass diese tatsächlich als Datei im Dateisystem liegen, da die Befehle eine Pfadangabe erwarten. **Zudem werden aktuell nur JPEG vom Modul unterstützt**.
 

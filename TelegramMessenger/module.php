@@ -63,7 +63,7 @@
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			foreach($recips as $r) {
-				$this->sendPhoto($text, $jpeg_path, $r);
+				$this->SendImage($text, $jpeg_path, $r);
 			}
 		}
 		
