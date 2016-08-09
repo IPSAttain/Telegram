@@ -55,7 +55,7 @@
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$img_info = getimagesize($image_path);
 			$mime = $img_info['mime'];
-			if ($mime == "image/jpg") {
+			if ($mime == "image/jpeg" or $mine == "image/jpg") {
 				$ext = ".jpg";
 			} else if ($mime == "image/png") {
 				$ext = ".png";
