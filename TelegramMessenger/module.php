@@ -14,7 +14,7 @@
             parent::Create();                       
 			$this->RegisterPropertyString("BotID", "123456789:JHJ56HJJHJ78778JKLKJKLJ8798JHJahjhw");
 			$this->RegisterPropertyString("Recipients", "123456789,987654321");   
-			$this->RegisterPropertyBoolean("FetchIncoming", false);
+			$this->RegisterPropertyBoolean("FetchIncoming", true);
 			$this->RegisterPropertyBoolean("ProcessIncoming", false);
 			$this->RegisterPropertyInteger ("ProcessIncomingSkript", 0);
 		
@@ -50,20 +50,31 @@
 			$telegram->sendMessage($content);
 		}
 		
-		public function SendImage($text, $jpeg_path, $userid) {
+		public function SendImage($text, $image_path, $userid) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
-			$img = curl_file_create($jpeg_path, 'image/jpg', md5($jpeg_path.time()).".jpg");
+			$img_info = getimagesize($image_path);
+			$mime = $img_info['mime'];
+			if ($mime == "image/jpg") {
+				$ext = ".jpg";
+			} else if ($mime == "image/png") {
+				$ext = ".png";
+			} else if ($mime == "image/gif") {
+				$ext = ".gif";
+			} else {
+				return false;
+			}
+			$img = curl_file_create($image_path, $mime , md5($image_path.time()).$ext);
 			$content = array('chat_id' => $userid, 'caption' => $text, 'photo' => $img);
 			$telegram->sendPhoto($content);
 		}
 		
-		public function SendImageToAll($text, $jpeg_path) {
+		public function SendImageToAll($text, $image_path) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			foreach($recips as $r) {
-				$this->sendPhoto($text, $jpeg_path, $r);
+				$this->SendImage($text, $image_path, $r);
 			}
 		}
 		
