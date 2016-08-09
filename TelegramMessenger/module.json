@@ -1,0 +1,14 @@
+{ 
+ 	"id": "{eaf404e1-7a2a-40a5-bb4a-e34ca5ac72e5}", 
+ 	"name": "TelegramMessenger" ,
+ 	"type": 3, 
+ 	"vendor": "", 
+ 	"aliases":  
+ 	[ 
+ 		"TelegramMessenger" 
+ 	], 
+ 	"parentRequirements": [], 
+ 	"childRequirements": [], 
+ 	"implemented": [], 
+ 	"prefix": "Telegram"
+}
