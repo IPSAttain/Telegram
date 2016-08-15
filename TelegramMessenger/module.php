@@ -115,8 +115,10 @@
 						$recips = explode(",",$this->ReadPropertyString("Recipients"));
 						foreach($recips as $r) {
 							if ($r == $chat_id) {
-								include_once(IPS_GetKernelDirEx()."scripts/".IPS_GetScriptFile($this->ReadPropertyInteger("ProcessIncomingSkript")));
-								process_incoming($this->InstanceID, $chat_id, $text);
+								IPS_RunScriptEx(
+									$this->ReadPropertyInteger("ProcessIncomingSkript"),
+									array("SENDER" => "Telegram", "INSTANCE" => $this->InstanceID, "CHAT" => $chat_id, "VALUE" => $text)
+								);
 								break;
 							}
 						}						

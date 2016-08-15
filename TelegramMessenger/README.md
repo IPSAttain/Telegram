@@ -46,14 +46,22 @@ Sofern man keine Nachrichten der Clients an IPS empfangen möchte kann der Haken 
 
 Möchte man hingegen Nachrichten empfangen, so muss der Haken gesetzt werden. Eingehende Nachrichten werden dann im Meldungen-Fenster von IPS geloggt. Interessant wird es natürlich erst, wenn man mit den Nachrichten auch etwas anstellen will. Dazu muss der Haken bei "Eingehende Nachrichten verarbeiten" gesetzt sein und ein Skript bei "Skript für eingehende Nachrichten" ausgewählt werden.
 
-Dieses Skript muss eine PHP-Funktion mit folgender Signatur enthalten:
+Dieses Skript bekommt die folgenden Variablen übergeben:
 
-> function process_incoming($instance, $senderid, $text)
 
-Die Variable $instance enthält die ID der Instanz die die Nachricht empfangen hat. $senderid ist der UserID des Absenders. $text enthält den empfangenen Text. Als Beispiel könnte das Skript wie folgt aussehen:
+- $_IPS['SENDER'] (ist "Telegram" wenn das Skript durch eine eingehende Nachricht aufgerufen wird)
+- $_IPS['INSTANCE'] (enthält die ID der empfangenden Instanz)
+- $_IPS['CHAT'] (enthält die ID des Absenders)
+- $_IPS['VALUE'] (enthält den vom User geschickten Text)
+
+Als Beispiel könnte das Skript wie folgt aussehen:
 
 ```php
 <?php
+if ($_IPS['SENDER'] == "Telegram") {
+	process_incoming($_IPS['INSTANCE'], $_IPS['CHAT'], $_IPS['VALUE']);
+}
+
 function process_incoming($instance, $senderid, $text) {
 	$return = "";
 
