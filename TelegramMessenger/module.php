@@ -82,7 +82,7 @@
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$ext = pathinfo($document_path);
-			$doc = curl_file_create($document_path, $mimetype , md5($document_path.time()).$ext['extension']);
+			$doc = curl_file_create($document_path, $mimetype , md5($document_path.time()).".".$ext['extension']);
 			$content = array('chat_id' => $userid, 'caption' => $text, 'document' => $doc);
 			$telegram->sendDocument($content);
 		}
