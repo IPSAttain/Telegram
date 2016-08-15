@@ -39,6 +39,7 @@ Für den Versand von Nachrichten an die definierten Empfänger definiert das Modul
 
 Wichtig beim Versand von Bildern ist, dass diese tatsächlich als Datei im Dateisystem liegen, da die Befehle eine Pfadangabe erwarten. Aktuell werden die Formate JPG, GIF und PNG unterstützt. Für animierte GIF muss SendDocument verwendet werden.
 
+
 ## Empfangen (und ggf. verarbeiten) von Nachrichten mit IPS
 
 Sofern man keine Nachrichten der Clients an IPS empfangen möchte kann der Haken bei "Eingehende Nachrichten abrufen" entfernt werden (nachdem man alle gewünschten User-IDs herausgefunden hat).
