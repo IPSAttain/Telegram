@@ -55,7 +55,7 @@
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$img_info = getimagesize($image_path);
 			$mime = $img_info['mime'];
-			if ($mime == "image/jpeg" or $mine == "image/jpg") {
+			if ($mime == "image/jpeg" or $mime == "image/jpg") {
 				$ext = ".jpg";
 			} else if ($mime == "image/png") {
 				$ext = ".png";
@@ -75,6 +75,24 @@
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			foreach($recips as $r) {
 				$this->SendImage($text, $image_path, $r);
+			}
+		}
+		
+		public function SendDocument($text, $document_path, $mimetype, $userid) {
+			include_once(__DIR__ . "/Telegram.php");
+			$telegram = new Telegram($this->ReadPropertyString("BotID"));
+			$ext = pathinfo($document_path)
+			$doc = curl_file_create($document_path, $mimetype , md5($document_path.time()).$ext['extension']);
+			$content = array('chat_id' => $userid, 'caption' => $text, 'document' => $doc);
+			$telegram->sendDocument($content);
+		}
+		
+		public function SendDocumentToAll($text, $document_path, $mimetype) {
+			include_once(__DIR__ . "/Telegram.php");
+			$telegram = new Telegram($this->ReadPropertyString("BotID"));
+			$recips = explode(",",$this->ReadPropertyString("Recipients"));
+			foreach($recips as $r) {
+				$this->SendDocument($text, $document_path, $mimetype, $r);
 			}
 		}
 		

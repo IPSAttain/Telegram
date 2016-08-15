@@ -34,8 +34,10 @@ Für den Versand von Nachrichten an die definierten Empfänger definiert das Modul
 - Telegram_SendTextToAll($InstanzID, $text)
 - Telegram_SendImage($InstanzID, $text, $Path_To_ImageFile, $UserID)
 - Telegram_SendImageToAll($InstanzID, $text, $Path_To_ImageFile)
+- Telegram_SendDocumentToAll($InstanzID, $text, $Path_to_Document, $MimeType);
+- Telegram_SendDocument($InstanzID, $text, $Path_to_Document, $MimeType, $UserID);
 
-Wichtig beim Versand von Bildern ist, dass diese tatsächlich als Datei im Dateisystem liegen, da die Befehle eine Pfadangabe erwarten. Aktuell werden die Formate JPG, GIF und PNG unterstützt.
+Wichtig beim Versand von Bildern ist, dass diese tatsächlich als Datei im Dateisystem liegen, da die Befehle eine Pfadangabe erwarten. Aktuell werden die Formate JPG, GIF und PNG unterstützt. Für animierte GIF muss SendDocument verwendet werden.
 
 ## Empfangen (und ggf. verarbeiten) von Nachrichten mit IPS
 

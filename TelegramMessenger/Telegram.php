@@ -758,8 +758,11 @@ class Telegram {
     }
 
     private function sendAPIRequest($url, array $content, $post = true) {
+		if (!isset($content['chat_id'])) {
+			$content['chat_id'] = "";
+		}
         $url = $url . "?chat_id=" . $content['chat_id'];
-	unset($content['chat_id']);
+		unset($content['chat_id']);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, false);
