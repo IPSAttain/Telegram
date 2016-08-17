@@ -30,12 +30,14 @@ Im IP-Symcon Meldungen Fenster wird dann ein Eintrag in der Form "Update von 123
 
 Für den Versand von Nachrichten an die definierten Empfänger definiert das Modul vier Befehle:
 
-- Telegram_SendText($InstanzID, $text, $UserID)
-- Telegram_SendTextToAll($InstanzID, $text)
+- Telegram_SendText($InstanzID, $text, $UserID, $ParseMode='Markdown')
+- Telegram_SendTextToAll($InstanzID, $text, $ParseMode='Markdown')
 - Telegram_SendImage($InstanzID, $text, $Path_To_ImageFile, $UserID)
 - Telegram_SendImageToAll($InstanzID, $text, $Path_To_ImageFile)
 - Telegram_SendDocumentToAll($InstanzID, $text, $Path_to_Document, $MimeType);
 - Telegram_SendDocument($InstanzID, $text, $Path_to_Document, $MimeType, $UserID);
+
+ParseMode definiert mit welcher Methode der Text formatiert wurde. Standard ist MarkDown, auf Wunsch kann dort aber "HTML" übergeben werden.
 
 Wichtig beim Versand von Bildern ist, dass diese tatsächlich als Datei im Dateisystem liegen, da die Befehle eine Pfadangabe erwarten. Aktuell werden die Formate JPG, GIF und PNG unterstützt. Für animierte GIF muss SendDocument verwendet werden.
 

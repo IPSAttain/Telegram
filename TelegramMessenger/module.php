@@ -36,17 +36,21 @@
         *
         */
 		
-		public function SendTextToAll($text) {
+		public function SendTextToAll($text, $format='Markdown') {
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			foreach($recips as $r) {
-				$this->SendText($text, $r);
+				$this->SendText($text, $r, $format);
 			}			
 		}
 		
-		public function SendText($text, $userid) {
+		public function SendText($text, $userid, $format='Markdown') {
 			include_once(__DIR__ . "/Telegram.php");
+			$frmt = "Markdown";
+			if ($format == "HTML") {
+				$frmt = "HTML";
+			}
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
-			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => "Markdown");
+			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => $frmt);
 			$telegram->sendMessage($content);
 		}
 		
