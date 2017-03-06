@@ -15,6 +15,7 @@
 			$this->RegisterPropertyBoolean("FetchIncoming", true);
 			$this->RegisterPropertyBoolean("ProcessIncoming", false);
 			$this->RegisterPropertyInteger ("ProcessIncomingSkript", 0);
+			$this->RegisterPropertyBoolean("HTML", false);
 			$this->RegisterTimer("GetUpdates", 15000, 'Telegram_GetUpdates($_IPS[\'TARGET\']);');
 		}
 		
@@ -43,8 +44,12 @@
 		
 		public function SendText($text, $userid) {
 			include_once(__DIR__ . "/Telegram.php");
+			$frmt = "Markdown";
+-			if ($this->ReadPropertyBoolean("HTML") == true) {
+-				$frmt = "HTML";
+-			}
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
-			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => "Markdown");
+			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => $frmt);
 			$telegram->sendMessage($content);
 		}
 		
