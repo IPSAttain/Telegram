@@ -37,9 +37,11 @@
 		
 		public function SendTextToAll($text) {
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
+			$retVal = true;
 			foreach($recips as $r) {
-				$this->SendText($text, $r);
-			}			
+				$retVal &= $this->SendText($text, $r);
+			}
+			return $retVal;
 		}
 		
 		public function SendText($text, $userid) {
@@ -50,7 +52,7 @@
 			}
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => $frmt);
-			$telegram->sendMessage($content);
+			return $telegram->sendMessage($content);
 		}
 		
 		public function SendImage($text, $image_path, $userid) {
@@ -69,16 +71,18 @@
 			}
 			$img = curl_file_create($image_path, $mime , md5($image_path.time()).$ext);
 			$content = array('chat_id' => $userid, 'caption' => $text, 'photo' => $img);
-			$telegram->sendPhoto($content);
+			return $telegram->sendPhoto($content);
 		}
 		
 		public function SendImageToAll($text, $image_path) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
+			$retVal = true;
 			foreach($recips as $r) {
-				$this->SendImage($text, $image_path, $r);
+				$retVal &= $this->SendImage($text, $image_path, $r);
 			}
+			return $retVal;
 		}
 		
 		public function SendDocument($text, $document_path, $mimetype, $userid) {
@@ -87,16 +91,18 @@
 			$ext = pathinfo($document_path);
 			$doc = curl_file_create($document_path, $mimetype , md5($document_path.time()).".".$ext['extension']);
 			$content = array('chat_id' => $userid, 'caption' => $text, 'document' => $doc);
-			$telegram->sendDocument($content);
+			return $telegram->sendDocument($content);
 		}
 		
 		public function SendDocumentToAll($text, $document_path, $mimetype) {
 			include_once(__DIR__ . "/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
+			$retVal = true;
 			foreach($recips as $r) {
-				$this->SendDocument($text, $document_path, $mimetype, $r);
+				$retVal &= $this->SendDocument($text, $document_path, $mimetype, $r);
 			}
+			return $retVal;
 		}
 		
 		public function GetUpdates() {
