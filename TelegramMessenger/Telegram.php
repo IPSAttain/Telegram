@@ -668,7 +668,11 @@ class Telegram {
 
 /// Get the number of updates
     public function UpdateCount() {
-        return count($this->updates["result"]);
+		if (is_array($this->updates)) {
+			return count($this->updates["result"]);	
+		} else {
+			return 0;
+		}
     }
 
     /// Tell if a message is from a group or user chat
@@ -741,7 +745,7 @@ class Telegram {
     public function getUpdates($offset = 0, $limit = 100, $timeout = 0, $update = true) {
         $content = array('offset' => $offset, 'limit' => $limit, 'timeout' => $timeout);
         $this->updates = $this->endpoint("getUpdates", $content);
-        if ($update AND count($this->updates["result"]) > 0) {
+        if ($update AND is_array($this->updates) AND count($this->updates["result"]) > 0) {
             $last_element_id = $this->updates["result"][count($this->updates["result"]) - 1]["update_id"] + 1;
             $content = array('offset' => $last_element_id, 'limit' => "1", 'timeout' => $timeout);
             $this->endpoint("getUpdates", $content);
