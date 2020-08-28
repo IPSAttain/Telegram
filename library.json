@@ -1,9 +1,9 @@
 { 
- 	"id": "{33c6b899-6f08-4f3c-84fa-e619b9e96d77}", 
- 	"author": "Jens Cramer", 
- 	"name": "JMC Modules", 
+ 	"id": "{33C6B899-6F08-4F3C-84FA-E619B9E96D77}", 
+ 	"author": "Jens Cramer / Attain", 
+ 	"name": "Telegram Modul", 
  	"url": "", 
- 	"version": "0.6", 
- 	"build": 1, 
+ 	"version": "1.0", 
+ 	"build": 2, 
  	"date": 0 
 } 

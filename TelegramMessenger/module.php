@@ -36,7 +36,7 @@
         *
         */
 		
-		public function SendTextToAll($text) {
+		public function SendTextToAll(string $text) {
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			$retVal = true;
 			foreach($recips as $r) {
@@ -45,8 +45,8 @@
 			return $retVal;
 		}
 		
-		public function SendText($text, $userid) {
-			include_once(__DIR__ . "/Telegram.php");
+		public function SendText(string $text, string $userid) {
+			include_once(__DIR__ . "/../libs/Telegram.php");
 			$frmt = "Markdown";
 			if ($this->ReadPropertyBoolean("HTML") == true) {
 				$frmt = "HTML";
@@ -56,8 +56,8 @@
 			return $telegram->sendMessage($content);
 		}
 		
-		public function SendImage($text, $image_path, $userid) {
-			include_once(__DIR__ . "/Telegram.php");
+		public function SendImage(string $text, string $image_path, string $userid) {
+			include_once(__DIR__ . "/../libs/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$img_info = getimagesize($image_path);
 			$mime = $img_info['mime'];
@@ -75,8 +75,8 @@
 			return $telegram->sendPhoto($content);
 		}
 		
-		public function SendImageToAll($text, $image_path) {
-			include_once(__DIR__ . "/Telegram.php");
+		public function SendImageToAll(string $text, string $image_path) {
+			include_once(__DIR__ . "/../libs/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			$retVal = true;
@@ -86,8 +86,8 @@
 			return $retVal;
 		}
 		
-		public function SendDocument($text, $document_path, $mimetype, $userid) {
-			include_once(__DIR__ . "/Telegram.php");
+		public function SendDocument(string $text, string $document_path, string $mimetype, string $userid) {
+			include_once(__DIR__ . "/../libs/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$ext = pathinfo($document_path);
 			$doc = curl_file_create($document_path, $mimetype , md5($document_path.time()).".".$ext['extension']);
@@ -95,8 +95,8 @@
 			return $telegram->sendDocument($content);
 		}
 		
-		public function SendDocumentToAll($text, $document_path, $mimetype) {
-			include_once(__DIR__ . "/Telegram.php");
+		public function SendDocumentToAll(string $text, string $document_path, string $mimetype) {
+			include_once(__DIR__ . "/../libs/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
 			$retVal = true;
@@ -108,7 +108,7 @@
 		
 		public function GetUpdates() {
 			if ($this->ReadPropertyBoolean("FetchIncoming")) {
-				include_once(__DIR__ . "/Telegram.php");
+				include_once(__DIR__ . "/../libs/Telegram.php");
 				$telegram = new Telegram($this->ReadPropertyString("BotID"));
 				$req = $telegram->getUpdates();
 

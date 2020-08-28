@@ -1,4 +1,4 @@
-# IP-Symcon 4.0+ Module von JMC
+# Telegram Messanger Module von JMC / Attain
 
 Welche Module sind in dieser Bibliothek enthalten?
 
