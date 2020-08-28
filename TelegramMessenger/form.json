@@ -6,6 +6,7 @@
 		{ "type": "CheckBox", "name": "HTML", "caption": "Nutze HTML Formatierung statt Markdown" },
         { "type": "CheckBox", "name": "FetchIncoming", "caption": "Eingehende Nachrichten abrufen" },
 		{ "type": "CheckBox", "name": "ProcessIncoming", "caption": "Eingehende Nachrichten verarbeiten" },
-		{ "type": "SelectScript", "name": "ProcessIncomingSkript", "caption": "Skript für eingehende Nachrichten" }
+        { "type": "SelectScript", "name": "ProcessIncomingSkript", "caption": "Skript für eingehende Nachrichten" },
+        { "type": "SelectScript", "name": "DeniedIncomingSkript", "caption": "Skript für nicht autorisierte Empfänger" }
     ]
 }
