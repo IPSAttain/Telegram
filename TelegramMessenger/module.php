@@ -140,6 +140,7 @@
 							IPS_RunScriptEx(
 								$this->ReadPropertyInteger("DeniedIncomingSkript"),
 								array("SENDER" => "Telegram", "INSTANCE" => $this->InstanceID, "CHAT" => $chat_id, "VALUE" => $text, "LASTNAME" => $last_name, "FIRSTNAME" => $first_name)
+							);
 						}						
 					}
 				}
