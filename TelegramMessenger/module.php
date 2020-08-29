@@ -167,7 +167,7 @@
 							}
 						}
 						if (!$GuarantAccess) {
-							SendText("Hey " . $first_name . " " . $last_name . "\r\n" . $this->ReadPropertyString("DeniedUser"), $chat_id);
+							$this->SendText("Hey " . $first_name . " " . $last_name . "\r\n" . $this->ReadPropertyString("DeniedUser"), $chat_id);
 						}						
 					}
 				}
