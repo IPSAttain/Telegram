@@ -132,7 +132,7 @@
 			$string = implode("</tr>",$buffer);
 			$this->WriteAttributeString("Buffer",$string);
 			$this->RegisterVariableString("Telegram_Table", "Telegram Events","~HTMLBox",10);
-			SetValue("Telegram_Table", $header . $string . "</table></body>");
+			SetValueString($this->GetIDForIdent("Telegram_Table"), $header . $string . "</table></body>");
 		}
 		
 		public function GetUpdates() {
