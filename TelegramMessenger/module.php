@@ -15,7 +15,7 @@
 			$this->RegisterPropertyBoolean("FetchIncoming", true);
 			$this->RegisterPropertyBoolean("ProcessIncoming", false);
 			$this->RegisterPropertyInteger ("ProcessIncomingSkript", 0);
-			$this->RegisterPropertyInteger ("DeniedIncomingSkript", 0);
+			$this->RegisterPropertyString("DeniedUser", "Zugriff Verweigert!");
 			$this->RegisterPropertyBoolean("HTML", false);
 			$this->RegisterTimer("GetUpdates", 15000, 'Telegram_GetUpdates($_IPS[\'TARGET\']);');
 		}
@@ -137,10 +137,7 @@
 							}
 						}
 						if (!$GuarantAccess) {
-							IPS_RunScriptEx(
-								$this->ReadPropertyInteger("DeniedIncomingSkript"),
-								array("SENDER" => "Telegram", "INSTANCE" => $this->InstanceID, "CHAT" => $chat_id, "VALUE" => $text, "LASTNAME" => $last_name, "FIRSTNAME" => $first_name)
-							);
+							SendText("Hey " . $first_name . " " . $last_name . "\r\n" . $this->ReadPropertyString("DeniedUser"), $chat_id);
 						}						
 					}
 				}

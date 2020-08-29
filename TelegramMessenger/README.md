@@ -47,7 +47,7 @@ Wichtig beim Versand von Bildern ist, dass diese tatsächlich als Datei im Datei
 Sofern man keine Nachrichten der Clients an IPS empfangen möchte kann der Haken bei "Eingehende Nachrichten abrufen" entfernt werden (nachdem man alle gewünschten User-IDs herausgefunden hat).
 
 Möchte man hingegen Nachrichten empfangen, so muss der Haken gesetzt werden. Eingehende Nachrichten werden dann im Meldungen-Fenster von IPS geloggt. Interessant wird es natürlich erst, wenn man mit den Nachrichten auch etwas anstellen will. Dazu muss der Haken bei "Eingehende Nachrichten verarbeiten" gesetzt sein und ein Skript bei "Skript für eingehende Nachrichten" ausgewählt werden.
-Zusätzlich kann ein 2. Script angegeben werden. Dies wird aufgerufen wenn ein Kommando von einem nicht autorisiertem Empfänger eingehen.
+Zusätzlich kann eine Antwort definiert werden, die an alle gesendet wird, wenn ein Kommando von einem nicht autorisiertem User empfangen wurde.
 ### ACHTUNG: Diese Informationen gehen an jeden der den Bot anfragt!!!!!!!!!! 
 
 Dieses Skript bekommt die folgenden Variablen übergeben:
