@@ -15,9 +15,10 @@
 			$this->RegisterPropertyBoolean("FetchIncoming", true);
 			$this->RegisterPropertyBoolean("ProcessIncoming", false);
 			$this->RegisterPropertyInteger ("ProcessIncomingSkript", 0);
-			$this->RegisterPropertyString("DeniedUser", "Zugriff Verweigert!");
+			$this->RegisterPropertyString("DeniedUser", "Access denied!");
 			$this->RegisterPropertyBoolean("HTML", false);
 			$this->RegisterTimer("GetUpdates", 15000, 'Telegram_GetUpdates($_IPS[\'TARGET\']);');
+			$this->RegisterAttributeString("Buffer", "");
 		}
 		
 		
@@ -25,7 +26,6 @@
         public function ApplyChanges() {
             // Diese Zeile nicht l�schen
             parent::ApplyChanges();
-
         }
  
         /**
@@ -105,6 +105,35 @@
 			}
 			return $retVal;
 		}
+
+		private function SetValueHTMLListe($chat_id, $text, $first_name, $last_name){
+			$amount = 10;
+			$header ='<body bgcolor="#525252"><style type="text/css">table.liste { font-family:Star Title; width: 100%; border-collapse: true;} table.liste td { font-size:8pt; border: 1px solid #444455; } table.liste th {font-size:10pt; border: 1px solid #444455; }</style>';
+			$header. ='<table border = "0" frame="box" class="liste">';
+			$header.='<tr>';
+			$header.='<th>Datum</th>';
+			$header.='<th>Uhrzeit</th>';
+			$header.='<th>ID</th>';
+			$header.='<th>Vorname</th>';
+			$header.='<th>Nachname</th>';
+			$header.='<th>Meldung</th>';
+			$header.='</tr>';
+		
+			$data ='<tr align="center"><td>'.date("d.m.Y").'</td>';
+			$data.='<td>'.date("H:i").'</td>';
+			$data.='<td>'.$chat_id.'</td>';
+			$data.='<td>'.$first_name.'</td>';
+			$data.='<td>'.$last_name.'</td>';
+			$data.='<td>'.$text.'</td>';
+		   
+			$buffer = explode("</tr>",$this->ReadAttributeString("Buffer"),$amount);
+			array_unshift($buffer, $data);
+			$buffer = array_slice( $buffer, 0, $amount );	
+			$string = implode("</tr>",$buffer);
+			$this->WriteAttributeString("Buffer",$string);
+			$this->RegisterVariableString("Telegram_Table", "Telegram Events","~HTMLBox",10);
+			SetValue("Telegram_Table", $header . $string . "</table></body>");
+		}
 		
 		public function GetUpdates() {
 			if ($this->ReadPropertyBoolean("FetchIncoming")) {
@@ -121,6 +150,7 @@
 					$first_name = $telegram->FirstName();
 					$last_name = $telegram->LastName();
 					IPS_LogMessage("Telegram", "Update von " . $chat_id . " -> " . $text . " / " . $date . " / " . print_r($telegram,true));
+					$this->SetValueHTMLListe($chat_id, $text, $first_name, $last_name);
 					// Verarbeiten von Nachrichten (aber nur wenn aktiviert und Nachricht nicht �lter als 1 Minute);
 					if ($this->ReadPropertyBoolean("ProcessIncoming") && (time() - $date) < 60) {
 						// Ist der User bekannt?

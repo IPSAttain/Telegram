@@ -1,9 +1,12 @@
 { 
- 	"id": "{33C6B899-6F08-4F3C-84FA-E619B9E96D77}", 
- 	"author": "Jens Cramer / Attain", 
- 	"name": "Telegram Modul", 
- 	"url": "", 
- 	"version": "1.0", 
- 	"build": 2, 
- 	"date": 0 
+	"id": "{33C6B899-6F08-4F3C-84FA-E619B9E96D77}", 
+	"author": "Jens Cramer / Attain", 
+	"name": "Telegram Modul", 
+	"url": "", 
+	"compatibility": {
+		"version": "5.0"
+	},
+	"version": "1.0", 
+	"build": 2, 
+	"date": 0 
 } 

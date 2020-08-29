@@ -1,0 +1,14 @@
+{
+    "translations": {
+        "de": {
+            "Partner IDs (Users that can interact with the Bot.)": "Partner-IDs (Benutzer, die mit dem Bot interagieren können.)",
+            "Password": "Passwort",
+            "Network": "Netzwerk",
+            "Language for Var Names": "Nutze HTML Formatierung statt Markdown",
+            "Retrieve incoming messages": "Eingehende Nachrichten abrufen",
+            "Process incoming messages": "Eingehende Nachrichten verarbeiten",
+            "Incoming message script": "Skript für eingehende Nachrichten",
+            "Reply to unknown users": "Antwort an unbekannte Nutzer"
+        }
+    }
+}
