@@ -109,15 +109,14 @@
 		private function SetValueHTMLListe($chat_id, $text, $first_name, $last_name){
 			$amount = 10;
 			$header ='<body bgcolor="#a6caf0"><style type="text/css">table.liste { width: 100%; border-collapse: true;} table.liste td { border: 1px solid #444455; } table.liste th { border: 1px solid #444455; }</style>';
-			//$header ='<body bgcolor="#525252"><style type="text/css">table.liste { font-family:Star Title; width: 100%; border-collapse: true;} table.liste td { font-size:8pt; border: 1px solid #444455; } table.liste th {font-size:10pt; border: 1px solid #444455; }</style>';
 			$header.='<table border = "0" frame="box" class="liste">';
 			$header.='<tr>';
-			$header.='<th>Datum</th>';
-			$header.='<th>Uhrzeit</th>';
-			$header.='<th>ID</th>';
-			$header.='<th>Vorname</th>';
-			$header.='<th>Nachname</th>';
-			$header.='<th>Meldung</th>';
+			$header.='<th>' . $this->Translate('Date') . '</th>';
+			$header.='<th>' . $this->Translate('Time') . '</th>';
+			$header.='<th>' . $this->Translate('User') . ' ID</th>';
+			$header.='<th>' . $this->Translate('First Name') . '</th>';
+			$header.='<th>' . $this->Translate('Last Name') . '</th>';
+			$header.='<th>' . $this->Translate('Message') . '</th>';
 			$header.='</tr>';
 		
 			$data ='<tr align="center"><td>'.date("d.m.Y").'</td>';

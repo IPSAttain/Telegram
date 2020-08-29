@@ -8,7 +8,13 @@
             "Retrieve incoming messages": "Eingehende Nachrichten abrufen",
             "Process incoming messages": "Eingehende Nachrichten verarbeiten",
             "Incoming message script": "Skript für eingehende Nachrichten",
-            "Reply to unknown users": "Antwort an unbekannte Nutzer"
+            "Reply to unknown users": "Antwort an unbekannte Nutzer",
+            "Date": "Datum",
+            "Time": "Uhrzeit",
+            "First Name": "Vorname",
+            "Last Name": "Nachname",
+            "Message": "Nachricht",
+            "User": "Benutzer"
         }
     }
 }
