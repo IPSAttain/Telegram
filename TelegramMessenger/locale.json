@@ -14,7 +14,8 @@
             "First Name": "Vorname",
             "Last Name": "Nachname",
             "Message": "Nachricht",
-            "User": "Benutzer"
+            "User": "Benutzer",
+            "Attention: This command is received by every unauthorized user.": "Achtung: Dieses Kommando wird von jedem nicht autorisierten User empfangen."
         }
     }
 }

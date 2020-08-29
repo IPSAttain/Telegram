@@ -7,6 +7,7 @@
         { "type": "CheckBox", "name": "FetchIncoming", "caption": "Retrieve incoming messages" },
 		{ "type": "CheckBox", "name": "ProcessIncoming", "caption": "Process incoming messages" },
         { "type": "SelectScript", "name": "ProcessIncomingSkript", "caption": "Incoming message script" },
-        { "type": "ValidationTextBox", "name": "DeniedUser", "caption": "Reply to unknown users" }
+        { "type": "ValidationTextBox", "name": "DeniedUser", "caption": "Reply to unknown users" },
+        { "type": "Label", "caption": "Attention: This command is received by every unauthorized user." }
     ]
 }

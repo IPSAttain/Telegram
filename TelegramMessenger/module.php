@@ -21,20 +21,11 @@
 			$this->RegisterAttributeString("Buffer", "");
 		}
 		
-		
         // �berschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
             // Diese Zeile nicht l�schen
             parent::ApplyChanges();
         }
- 
-        /**
-        * Die folgenden Funktionen stehen automatisch zur Verf�gung, wenn das Modul �ber die "Module Control" eingef�gt wurden.
-        * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wiefolgt zur Verf�gung gestellt:
-        *
-        * ABC_MeineErsteEigeneFunktion($id);
-        *
-        */
 		
 		public function SendTextToAll(string $text) {
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
