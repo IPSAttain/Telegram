@@ -15,26 +15,17 @@
 			$this->RegisterPropertyBoolean("FetchIncoming", true);
 			$this->RegisterPropertyBoolean("ProcessIncoming", false);
 			$this->RegisterPropertyInteger ("ProcessIncomingSkript", 0);
-			$this->RegisterPropertyInteger ("DeniedIncomingSkript", 0);
+			$this->RegisterPropertyString("DeniedUser", "Access denied!");
 			$this->RegisterPropertyBoolean("HTML", false);
 			$this->RegisterTimer("GetUpdates", 15000, 'Telegram_GetUpdates($_IPS[\'TARGET\']);');
+			$this->RegisterAttributeString("Buffer", "");
 		}
-		
 		
         // �berschreibt die intere IPS_ApplyChanges($id) Funktion
         public function ApplyChanges() {
             // Diese Zeile nicht l�schen
             parent::ApplyChanges();
-
         }
- 
-        /**
-        * Die folgenden Funktionen stehen automatisch zur Verf�gung, wenn das Modul �ber die "Module Control" eingef�gt wurden.
-        * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wiefolgt zur Verf�gung gestellt:
-        *
-        * ABC_MeineErsteEigeneFunktion($id);
-        *
-        */
 		
 		public function SendTextToAll(string $text) {
 			$recips = explode(",",$this->ReadPropertyString("Recipients"));
@@ -105,6 +96,35 @@
 			}
 			return $retVal;
 		}
+
+		private function SetValueHTMLListe($chat_id, $text, $first_name, $last_name){
+			$amount = 10;
+			$header ='<body bgcolor="#a6caf0"><style type="text/css">table.liste { width: 100%; border-collapse: true;} table.liste td { border: 1px solid #444455; } table.liste th { border: 1px solid #444455; }</style>';
+			$header.='<table border = "0" frame="box" class="liste">';
+			$header.='<tr>';
+			$header.='<th>' . $this->Translate('Date') . '</th>';
+			$header.='<th>' . $this->Translate('Time') . '</th>';
+			$header.='<th>' . $this->Translate('User') . ' ID</th>';
+			$header.='<th>' . $this->Translate('First Name') . '</th>';
+			$header.='<th>' . $this->Translate('Last Name') . '</th>';
+			$header.='<th>' . $this->Translate('Message') . '</th>';
+			$header.='</tr>';
+		
+			$data ='<tr align="center"><td>'.date("d.m.Y").'</td>';
+			$data.='<td>'.date("H:i").'</td>';
+			$data.='<td>'.$chat_id.'</td>';
+			$data.='<td>'.$first_name.'</td>';
+			$data.='<td>'.$last_name.'</td>';
+			$data.='<td>'.$text.'</td>';
+		   
+			$buffer = explode("</tr>",$this->ReadAttributeString("Buffer"),$amount);
+			array_unshift($buffer, $data);
+			$buffer = array_slice( $buffer, 0, $amount );	
+			$string = implode("</tr>",$buffer);
+			$this->WriteAttributeString("Buffer",$string);
+			$this->RegisterVariableString("Telegram_Table", "Telegram Events","~HTMLBox",10);
+			SetValueString($this->GetIDForIdent("Telegram_Table"), $header . $string . "</table></body>");
+		}
 		
 		public function GetUpdates() {
 			if ($this->ReadPropertyBoolean("FetchIncoming")) {
@@ -121,6 +141,7 @@
 					$first_name = $telegram->FirstName();
 					$last_name = $telegram->LastName();
 					IPS_LogMessage("Telegram", "Update von " . $chat_id . " -> " . $text . " / " . $date . " / " . print_r($telegram,true));
+					$this->SetValueHTMLListe($chat_id, $text, $first_name, $last_name);
 					// Verarbeiten von Nachrichten (aber nur wenn aktiviert und Nachricht nicht �lter als 1 Minute);
 					if ($this->ReadPropertyBoolean("ProcessIncoming") && (time() - $date) < 60) {
 						// Ist der User bekannt?
@@ -137,10 +158,7 @@
 							}
 						}
 						if (!$GuarantAccess) {
-							IPS_RunScriptEx(
-								$this->ReadPropertyInteger("DeniedIncomingSkript"),
-								array("SENDER" => "Telegram", "INSTANCE" => $this->InstanceID, "CHAT" => $chat_id, "VALUE" => $text, "LASTNAME" => $last_name, "FIRSTNAME" => $first_name)
-							);
+							$this->SendText("Hey " . $first_name . " " . $last_name . "\r\n" . $this->ReadPropertyString("DeniedUser"), $chat_id);
 						}						
 					}
 				}

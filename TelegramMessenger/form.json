@@ -2,11 +2,12 @@
     "elements":
     [
         { "type": "ValidationTextBox", "name": "BotID", "caption": "Bot ID" },
-        { "type": "ValidationTextBox", "name": "Recipients", "caption": "Empfänger (CSV)" },
-		{ "type": "CheckBox", "name": "HTML", "caption": "Nutze HTML Formatierung statt Markdown" },
-        { "type": "CheckBox", "name": "FetchIncoming", "caption": "Eingehende Nachrichten abrufen" },
-		{ "type": "CheckBox", "name": "ProcessIncoming", "caption": "Eingehende Nachrichten verarbeiten" },
-        { "type": "SelectScript", "name": "ProcessIncomingSkript", "caption": "Skript für eingehende Nachrichten" },
-        { "type": "SelectScript", "name": "DeniedIncomingSkript", "caption": "Skript für nicht autorisierte Empfänger" }
+        { "type": "ValidationTextBox", "name": "Recipients", "caption": "Partner IDs (Users that can interact with the Bot.)" },
+		{ "type": "CheckBox", "name": "HTML", "caption": "Use HTML formatting instead of Markdown" },
+        { "type": "CheckBox", "name": "FetchIncoming", "caption": "Retrieve incoming messages" },
+		{ "type": "CheckBox", "name": "ProcessIncoming", "caption": "Process incoming messages" },
+        { "type": "SelectScript", "name": "ProcessIncomingSkript", "caption": "Incoming message script" },
+        { "type": "ValidationTextBox", "name": "DeniedUser", "caption": "Reply to unknown users" },
+        { "type": "Label", "caption": "Attention: This command is received by every unauthorized user." }
     ]
 }
