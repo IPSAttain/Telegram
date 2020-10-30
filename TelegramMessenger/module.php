@@ -145,7 +145,7 @@
 
 				for ($i = 0; $i < $telegram->UpdateCount(); $i++) {
 					// You NEED to call serveUpdate before accessing the values of message in Telegram Class
-					IPS_SendDebug($this->data["message"] ["text"]);
+					IPS_SendDebug("text",$this->data["message"] ["text"],0);
 					$telegram->serveUpdate($i);
 					$text = $telegram->Text();
 					$chat_id = $telegram->ChatID();
