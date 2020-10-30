@@ -141,7 +141,7 @@
 			if ($this->ReadPropertyBoolean("FetchIncoming")) {
 				include_once(__DIR__ . "/../libs/Telegram.php");
 				$telegram = new Telegram($this->ReadPropertyString("BotID"));
-				$req = $telegram->getUpdates();
+				//$req = $telegram->getUpdates();
 
 				for ($i = 0; $i < $telegram->UpdateCount(); $i++) {
 					// You NEED to call serveUpdate before accessing the values of message in Telegram Class
