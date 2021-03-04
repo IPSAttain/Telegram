@@ -648,7 +648,9 @@ class Telegram {
 
 /// Get the last name of the user
     public function LastName() {
-        return $this->data["message"]["from"]["last_name"];
+        if(isset($this->data["message"]["from"]["last_name"]))
+            return $this->data["message"]["from"]["last_name"];
+        return "";
     }
 
 /// Get the username of the user
