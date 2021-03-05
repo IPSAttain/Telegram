@@ -46,7 +46,18 @@
 			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => $frmt);
 			return $telegram->sendMessage($content);
 		}
-		
+
+		public function SendTextKey(string $text, string $userid, string $markup) {
+			include_once(__DIR__ . "/../libs/Telegram.php");
+			$frmt = "Markdown";
+			if ($this->ReadPropertyBoolean("HTML") == true) {
+					$frmt = "HTML";
+			}
+			$telegram = new Telegram($this->ReadPropertyString("BotID"));
+			$content = array('chat_id' => $userid, 'text' => $text, 'parse_mode' => $frmt,'reply_markup' => $markup);
+			return $telegram->sendMessage($content);
+		}
+
 		public function SendImage(string $text, string $image_path, string $userid) {
 			include_once(__DIR__ . "/../libs/Telegram.php");
 			$telegram = new Telegram($this->ReadPropertyString("BotID"));
@@ -134,6 +145,7 @@
 
 				for ($i = 0; $i < $telegram->UpdateCount(); $i++) {
 					// You NEED to call serveUpdate before accessing the values of message in Telegram Class
+					//IPS_SendDebug("text",$telegram["message"]["text"],0);
 					$telegram->serveUpdate($i);
 					$text = $telegram->Text();
 					$chat_id = $telegram->ChatID();
@@ -163,6 +175,6 @@
 					}
 				}
 			}
-		}
-    }
+		}  
+	}
 ?>
